@@ -14,16 +14,16 @@ import java.util.Set;
 
 /**
  *
- * @author Gerald H, 25.01.2018
+ * @author GerH, 25.01.2018
  *
  */
 public class AprioriAlgorithm {
 
-	//HashMap, Die alle S‰tze (als Hashmap) beinhaltet, die aus deren Wˆrtern bestehen
+	//HashMap, Die alle S√§tze (als Hashmap) beinhaltet, die aus deren W√∂rtern bestehen
 	static HashMap<Integer, HashMap<Integer, String>> allLinesMap = new HashMap<Integer, HashMap<Integer, String>>();
 
-	//Kombinationen, die alle derzeit erlaubten Kombinationen enth‰lt.
-	//Nach z.B. der 3. Iteration enth‰lt es ausschlieﬂlich Sets mit 3 Wˆrtern.
+	//Kombinationen, die alle derzeit erlaubten Kombinationen enth√§lt.
+	//Nach z.B. der 3. Iteration enth√§lt es ausschlie√ülich Sets mit 3 W√∂rtern.
 	static HashMap<Integer, Set<String>> currentAllowedCombination = new HashMap<Integer, Set<String>>();
 	static int currentAllowedCombinationKey=0;
 
@@ -45,14 +45,14 @@ public class AprioriAlgorithm {
 		String[] lines = fileContent.split(lineSeparator);
 		String[] words = fileContent.replace(lineSeparator, wordSeparator).split(wordSeparator);
 
-		//wordSet, in dem jedes Wort 1x vorkommt (kann schneller durchiteriert werden; bei adult.txt nur 100 Eintr‰ge)
+		//wordSet, in dem jedes Wort 1x vorkommt (kann schneller durchiteriert werden; bei adult.txt nur 100 Eintr√§ge)
 		Set<String> wordSet = new HashSet<String>();
 		for(String word : words){
 			wordSet.add(word);
 		}
 
-		//HashMap, die Hashmaps mit Wˆrtern einer Zeile enth‰lt
-		//Wird sp‰ter durchiteriert, um festzustellen, wie oft ein Wort in den Zeilen vorkommt.
+		//HashMap, die Hashmaps mit W√∂rtern einer Zeile enth√§lt
+		//Wird sp√§ter durchiteriert, um festzustellen, wie oft ein Wort in den Zeilen vorkommt.
 		int iterator0=0;
 		for (String line : lines){
 			String[] lineWords = line.split(wordSeparator);
@@ -63,18 +63,18 @@ public class AprioriAlgorithm {
 				sentenceWithWordMap.put(tempIterator0, lineWord);
 				tempIterator0++;
 			}
-			//Satz zu allLinesMap hinzuf¸gen
+			//Satz zu allLinesMap hinzuf√ºgen
 			allLinesMap.put(iterator0, sentenceWithWordMap);
 			iterator0++;
 		}
 
-		//Set, das die Wort-Kombinationen enth‰lt
+		//Set, das die Wort-Kombinationen enth√§lt
 		HashMap<Integer, Set<String>> wordMap = new HashMap<Integer, Set<String>>();
 
 		boolean hasReturnedResults=true;
-		int sizeOfWordCombinations=1; //1=Ein Wort, 2=Zwei Wˆrter, etc.
+		int sizeOfWordCombinations=1; //1=Ein Wort, 2=Zwei W√∂rter, etc.
 
-		//Output f¸r Part 1 (ìoneItems.txtî)
+		//Output f√ºr Part 1 (‚ÄúoneItems.txt‚Äù)
 		String outputForOneItemsTxt="";
 		String outputForPatternsTxt="";
 
@@ -98,13 +98,13 @@ public class AprioriAlgorithm {
 
 			for(Set<String> wordCombination : wordMap.values()){
 
-				//Z‰hle, in wie vielen Zeilen die Kombination vorkommt
+				//Z√§hle, in wie vielen Zeilen die Kombination vorkommt
 				int occurences = getNumOfOccurences(wordCombination);
 
-				//Alle, die ¸ber Threshold liegen, werden eingetragen
+				//Alle, die √ºber Threshold liegen, werden eingetragen
 				if(occurences > minThreshold){
 
-					//Zu text file hinzuf¸gen (vorerst nur zum String daf¸r)
+					//Zu text file hinzuf√ºgen (vorerst nur zum String daf√ºr)
 					if(sizeOfWordCombinations==1){
 						for(String singleWord : wordCombination)
 							wordSet.add(singleWord);
@@ -113,7 +113,7 @@ public class AprioriAlgorithm {
 					outputForPatternsTxt += (occurences + ":" + wordCombination+"\n");
 					System.out.print(occurences + ":" + wordCombination+"\n");
 
-					//Kombination hinzuf¸gen
+					//Kombination hinzuf√ºgen
 					hasReturnedResults=true;
 					currentAllowedCombination.put(currentAllowedCombinationKey, wordCombination);
 					currentAllowedCombinationKey++;
@@ -135,7 +135,7 @@ public class AprioriAlgorithm {
 		printTxt("patterns", outputForPatternsTxt);
 	}
 
-	//Alle mˆglichen Kombinationen f¸r eine Iteration erstellen
+	//Alle m√∂glichen Kombinationen f√ºr eine Iteration erstellen
 	private static HashMap<Integer, Set<String>> fillMap(int iteration, Set<String> words){
 		int iterator=0;
 		HashMap<Integer, Set<String>> returnMap = new HashMap<Integer, Set<String>>();
@@ -191,19 +191,19 @@ public class AprioriAlgorithm {
 		return null;
 	}
 
-	//‹berpr¸fe, wie oft ein oder mehrere Wˆrter in adult.txt vorkommen
+	//√úberpr√ºfe, wie oft ein oder mehrere W√∂rter in adult.txt vorkommen
 	private static int getNumOfOccurences(Set<String> wordsToCheck){
 		int occurences=0;
 		boolean occuredInSentence = false;
 		//Zeilen (von adult.txt) durchiterieren
 		for(HashMap<Integer, String> oneLineMap : allLinesMap.values()){
-			//Check, ob gesuchte Wˆrter vorkommen
+			//Check, ob gesuchte W√∂rter vorkommen
 			for(String wordToCheck : wordsToCheck){
 				if(oneLineMap.containsValue(wordToCheck)){
 					occuredInSentence=true;
 				}
 				else{
-					//mind ein Wort kommt nicht vor -> diesen Satz nicht weiter ¸berpr¸fen
+					//mind ein Wort kommt nicht vor -> diesen Satz nicht weiter √ºberpr√ºfen
 					occuredInSentence=false;
 					break;
 				}
@@ -215,7 +215,7 @@ public class AprioriAlgorithm {
 			}
 		}
 
-		//Zur¸ckgeben, wie oft das Wort/die Wˆrter in adult.txt vorkommt.
+		//Zur√ºckgeben, wie oft das Wort/die W√∂rter in adult.txt vorkommt.
 		return occurences;
 	}
 
