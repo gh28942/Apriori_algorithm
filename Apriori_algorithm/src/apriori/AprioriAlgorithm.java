@@ -15,8 +15,9 @@ import java.util.Set;
 /**
  *
  * @author GerH, 25.01.2018
- *
+ * http://bit.ly/GerhGithub
  */
+
 public class AprioriAlgorithm {
 
 	//HashMap, Die alle Sätze (als Hashmap) beinhaltet, die aus deren Wörtern bestehen
