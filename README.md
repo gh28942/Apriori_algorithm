@@ -1,4 +1,4 @@
-# Apriori_algorithm
+# Apriori Algorithm (Java)
 An implementation of the Apriori algorithm in Java.
 This algorithm tells you which kind of combination appears most often in a data set. 
 This implementation takes the data set 'adult.txt' and concludes in the 7th iteration that the combination [Husband, White, United-States, Male, <=50K, Private, Married-civ-spouse] appears 3831 times (most often combination with 6 items). <br>
